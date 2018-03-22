@@ -1,9 +1,9 @@
 body {
   background-color: #b0b7c1;
-  font-family: "Century Gothic", "Arial";
-  padding: .5em;
+  font-family: "Century Gothic", Arial;
+  padding-top: 5em;
   color: #A239CA;
-  font-weight: 300;
+  text-align: center;
 }
 
 h1 {
@@ -15,14 +15,14 @@ h1 {
 }
 
 main {
- padding: .25em;
+ width: 22em;
+ margin: auto;
 }
 
 fieldset {
   padding: 10px;
   border: 1px solid;
   margin-bottom: 10px;
-  width: 20em;
 }
 
 legend {
@@ -36,8 +36,11 @@ legend {
 label {
   display:inline-block;
   margin-bottom: 10px;
-  color: #8540a0;
+  margin-right: 1em;
+  color: #8540bf;
   font-style: normal;
+  text-align: right;
+  width: 8em;
 }
 
 input {
@@ -52,7 +55,6 @@ input:invalid {
 }
 
 button {
-  margin-top: .5em;
-  margin-left: 10em;
-  text-align: center;
+  margin-top: .25em;
+  height: 1.75em;
 }
