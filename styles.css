@@ -2,15 +2,57 @@ body {
   background-color: #b0b7c1;
   font-family: "Century Gothic", "Arial";
   padding: .5em;
+  color: #A239CA;
+  font-weight: 300;
 }
 
 h1 {
   padding: .25em;
-  color: #A239CA;
-  font-style: italic;
   font-size: 2em;
-  font-weight: 300;
   text-decoration: underline double;
+  font-weight: 300;
+  font-style: italic;
 }
 
+main {
+ padding: .25em;
+}
 
+fieldset {
+  padding: 10px;
+  border: 1px solid;
+  margin-bottom: 10px;
+  width: 20em;
+}
+
+legend {
+  font-weight: 900;
+  font-style: italic;
+  border: 2px solid;
+  padding: 0 5px 0 5px;
+  background-color: #dddddd;
+}
+
+label {
+  display:inline-block;
+  margin-bottom: 10px;
+  color: #8540a0;
+  font-style: normal;
+}
+
+input {
+  float:right;
+  margin-right: 2em;
+  width: 120px;
+  text-align: right;
+}
+
+input:invalid {
+  background-color: pink;
+}
+
+button {
+  margin-top: .5em;
+  margin-left: 10em;
+  text-align: center;
+}
