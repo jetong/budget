@@ -1,0 +1,16 @@
+body {
+  background-color: #b0b7c1;
+  font-family: "Century Gothic", "Arial";
+  padding: .5em;
+}
+
+h1 {
+  padding: .25em;
+  color: #A239CA;
+  font-style: italic;
+  font-size: 2em;
+  font-weight: 300;
+  text-decoration: underline double;
+}
+
+
