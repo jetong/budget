@@ -16,7 +16,7 @@ function resizeCanvas() {
 }
 
 function PieChart() {
-  drawPieChart(canvas.width/2, canvas.height/2, canvas.height/3);
+  drawPieChart(canvas.width/2, canvas.height/2, canvas.width/3);
 }
 
 function drawPieChart(x, y, radius) {
