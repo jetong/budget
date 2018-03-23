@@ -35,7 +35,6 @@ function drawPieChart(x, y, radius) {
     }
   }
 
-
   // Initialize rgb values
   var red = 0;
   var green = 0;
@@ -53,13 +52,13 @@ function drawPieChart(x, y, radius) {
 
     switch(i%3) {
       case 0:
-        red += 80;
+        red += 160;
         break;
       case 1:
-        green += 80;
+        blue += 160;
         break;
       case 2:
-        blue += 80;
+        green += 50;
         break;
       default:
         console.log("Error with switch statement in drawPieChart()");
