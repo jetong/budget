@@ -1,0 +1,8 @@
+center element: set element to have margin:auto and create parent div with text-align: center.
+
+button type="button" to prevent default behavior of refreshing page on submit
+
+Wrap canvas with a div.  Adjust the div's width/height, and have the canvas resize to match.
+Resizing canvas directly clears the canvas and resets the context.
+
+Use min-width to maintain page layout when browser window is collapsed to small view.
