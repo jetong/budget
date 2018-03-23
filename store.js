@@ -1,12 +1,10 @@
-var income, 
-    housing, 
+var housing, 
     transportation, 
     education, 
     personal, 
     savings;
 
 function update() {
-  income = sessionStorage.getItem("income") || 0;
   housing = sessionStorage.getItem("housing") || 0;
   transportation = sessionStorage.getItem("transportation") || 0;
   education = sessionStorage.getItem("education") || 0;
@@ -14,7 +12,7 @@ function update() {
   savings = sessionStorage.getItem("savings") || 0;
 
   sessionStorage.setItem("income", 
-    parseInt(income) + parseInt(document.getElementById("income").value));
+    parseInt(document.getElementById("income").value));
   sessionStorage.setItem("housing", 
     parseInt(housing) + parseInt(document.getElementById("housing").value));
   sessionStorage.setItem("transportation", 
