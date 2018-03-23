@@ -8,13 +8,13 @@
   <script src="graph.js"></script>
 </head>
 
-<body>
+<body onload="init()">
   <div id="row">
+
     <div id="left">
       <header>
         <h1>Budget Tracker</h1>
       </header>
-
       <main>
         <form>
           <fieldset>
@@ -40,15 +40,17 @@
             <label for="savings">Savings</label>
             <input type="number" id="savings" value=0>
           </fieldset> 
-  
-          <button onclick="update()">Enter Data</button>
+          <button id="submit" onclick="update()">Enter Data</button>
         <form>
       </main>
-
     </div> <!-- left div -->
+
     <div id="right">
-      <p>Pie Chart</p>
+      <h2>Pie Chart</h2>
+      <button id="graph" onclick="drawPieChart()">Render Pie Chart!</button>
+      <canvas id="canvas"></canvas>
     </div> <!-- right div-->
+
     <footer>
     </footer>
 
