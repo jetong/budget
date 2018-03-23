@@ -33,11 +33,17 @@ body {
 }
 
 h1 {
-  padding: .25em;
+  padding-bottom: .25em;
   font-size: 2em;
   text-decoration: underline double;
   font-weight: 300;
   font-style: italic;
+}
+
+h2 {
+  font-weight: 100;
+  font-style: italic;
+  text-decoration: underline;
 }
 
 main {
@@ -82,9 +88,10 @@ input:invalid {
 
 #submit {
   margin-top: .25em;
-  height: 1.75em;
+  height: 2em;
 }
 
 #graph {
   margin:auto;
+  height: 2em;
 }
