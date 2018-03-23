@@ -1,26 +1,36 @@
-var housing, 
-    transportation, 
-    education, 
-    personal, 
-    savings;
+var prevHousing, 
+    prevTransportation, 
+    prevEducation, 
+    prevPersonal, 
+    prevSavings;
 
 function update() {
-  housing = sessionStorage.getItem("housing") || 0;
-  transportation = sessionStorage.getItem("transportation") || 0;
-  education = sessionStorage.getItem("education") || 0;
-  personal = sessionStorage.getItem("personal") || 0;
-  savings = sessionStorage.getItem("savings") || 0;
+  // get previous values if defined, else set to 0
+  prevHousing = sessionStorage.getItem("housing") || 0;
+  prevTransportation = sessionStorage.getItem("transportation") || 0;
+  prevEducation = sessionStorage.getItem("education") || 0;
+  prevPersonal = sessionStorage.getItem("personal") || 0;
+  prevSavings = sessionStorage.getItem("savings") || 0;
 
-  sessionStorage.setItem("income", 
-    parseInt(document.getElementById("income").value));
-  sessionStorage.setItem("housing", 
-    parseInt(housing) + parseInt(document.getElementById("housing").value));
-  sessionStorage.setItem("transportation", 
-    parseInt(transportation) + parseInt(document.getElementById("transportation").value));
-  sessionStorage.setItem("education", 
-    parseInt(education) + parseInt(document.getElementById("education").value));
-  sessionStorage.setItem("personal", 
-    parseInt(personal) + parseInt(document.getElementById("personal").value));
-  sessionStorage.setItem("savings", 
-    parseInt(savings) + parseInt(document.getElementById("savings").value));
+  // get current values just submitted by user
+  curIncome = document.getElementById("income").value;
+  curHousing = document.getElementById("housing").value;
+  curTransportation = document.getElementById("transportation").value;
+  curEducation = document.getElementById("education").value;
+  curPersonal = document.getElementById("personal").value;
+  curSavings = document.getElementById("savings").value;
+
+  // add current values to previous values and store the new cumulative total
+  sessionStorage.setItem("income", parseInt(curIncome));
+  sessionStorage.setItem("housing", parseInt(prevHousing) + parseInt(curHousing));
+  sessionStorage.setItem("transportation", parseInt(prevTransportation) + parseInt(curTransportation));
+  sessionStorage.setItem("education", parseInt(prevEducation) + parseInt(curEducation));
+  sessionStorage.setItem("personal", parseInt(prevPersonal) + parseInt(curPersonal));
+  sessionStorage.setItem("savings", parseInt(prevSavings) + parseInt(curSavings));
+
+  // reset input field values to 0
+  var inputs = document.querySelectorAll("input");
+  for(var i=0; i<inputs.length; i++) {
+    inputs[i].value = 0;
+  }
 }
