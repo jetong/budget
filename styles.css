@@ -1,7 +1,7 @@
 body {
   background-color: #b0b7c1;
   font-family: "Century Gothic", Arial;
-  padding-top: 4em;
+  padding-top: 3em;
   color: #A239CA;
 }
 
@@ -10,6 +10,7 @@ body {
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
+  padding: 1em;
 }
 
 #left {
@@ -44,6 +45,12 @@ border: blue solid;
   width:40%;
 border:red solid;
 min-width: 5em;
+}
+
+ul {
+padding: .25em;
+margin: .5em;
+border: pink solid;
 }
 
 h1 {

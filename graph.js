@@ -17,9 +17,11 @@ function init() {
     colors[i] = "rgb(" + red + "," + green + "," + blue + ")";
   }
 
-  // Resize canvas to match window resize, and redraw the pieChart
+  // Set listener to resize canvas to match window resize, and redraw the pieChart
   window.addEventListener('resize', resizeCanvas, false);
-  resizeCanvas();
+  // Register canvas dimensions onload
+  canvas.width = document.getElementById("canvas-wrapper").clientWidth;
+  canvas.height = document.getElementById("canvas-wrapper").clientHeight;
 }
 
 function resizeCanvas() {
@@ -30,7 +32,7 @@ function resizeCanvas() {
 
 function PieChart() {
   drawPieChart(canvas.width/2, canvas.height/2, canvas.width/3);
-//  createKey();
+  createKey();
 }
 
 function drawPieChart(x, y, radius) {
@@ -65,7 +67,6 @@ function drawPieChart(x, y, radius) {
     endingAngle = startingAngle + Math.PI*2*ratio;
 
     context.arc(x, y, radius, startingAngle, endingAngle);
-
     context.lineTo(x, y);
 
     startingAngle = endingAngle;
@@ -75,12 +76,17 @@ function drawPieChart(x, y, radius) {
     context.closePath();
   }
 }
-/*
+
 function createKey() {
   keyDiv = document.getElementById("key");
 
+  // Remove previous key items
+  while (keyDiv.firstChild) {
+    keyDiv.removeChild(keyDiv.firstChild);
+  }
 
-  for(var i = 0; i < values.length; i++) {
+  // Append new key items
+  for(var i = 0; i < 6; i++) {
     var item = document.createElement("p");
     var label = document.createElement("label");
     var colorBox = document.createElement("div");
@@ -99,4 +105,4 @@ function createKey() {
     keyDiv.appendChild(item);
   }
 }
-*/
+
