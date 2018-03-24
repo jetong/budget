@@ -38,19 +38,11 @@ body {
   width: 60%;
   height: 22em;
   min-width: 18em;
-border: blue solid;
 }
 
 #key-wrapper {
   width:40%;
-border:red solid;
-min-width: 5em;
-}
-
-ul {
-padding: .25em;
-margin: .5em;
-border: pink solid;
+  min-width: 5em;
 }
 
 h1 {
