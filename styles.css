@@ -38,7 +38,6 @@ body {
   width: 60%;
   height: 22em;
   min-width: 18em;
-  border: #A239CA solid 1px;
 }
 
 #key-wrapper {
@@ -113,6 +112,6 @@ input:invalid {
 }
 
 #graph {
-  margin:auto;
+  margin-bottom: 1em;
   height: 2em;
 }
