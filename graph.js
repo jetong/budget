@@ -1,11 +1,10 @@
 var canvas;
 var context;
-var values = [];
 var sum = 0;
 var colors = [];
 
-
 function init() {
+  // Get canvas graphics context
   canvas = document.getElementById("canvas");
   context = canvas.getContext("2d");
 
@@ -18,6 +17,7 @@ function init() {
     colors[i] = "rgb(" + red + "," + green + "," + blue + ")";
   }
 
+  // Resize canvas to match window resize, and redraw the pieChart
   window.addEventListener('resize', resizeCanvas, false);
   resizeCanvas();
 }
@@ -29,16 +29,16 @@ function resizeCanvas() {
 }
 
 function PieChart() {
-  context.clearRect(0, 0, canvas.width, canvas.height);
   drawPieChart(canvas.width/2, canvas.height/2, canvas.width/3);
-  createKey();
+//  createKey();
 }
 
 function drawPieChart(x, y, radius) {
- // context.save();
-  context.clearRect(0, 0, canvas.width, canvas.height);
-
+  // Reset sum for each button click
+  sum = 0;
+ 
   // Place cached values into array and calculate sum
+  var values = [];
   for(var i = 0; i < sessionStorage.length; i++) {
     var key = sessionStorage.key(i);
     if(key != "income") {
@@ -56,7 +56,6 @@ function drawPieChart(x, y, radius) {
 
   // Current pie section's ratio of the whole pie
   var ratio;
-
   for(var i = 0; i < values.length; i++) {
     context.beginPath();
 
@@ -74,11 +73,9 @@ function drawPieChart(x, y, radius) {
     context.fill();
     context.stroke();
     context.closePath();
-
-  //  context.restore();
   }
 }
-
+/*
 function createKey() {
   keyDiv = document.getElementById("key");
 
@@ -102,3 +99,4 @@ function createKey() {
     keyDiv.appendChild(item);
   }
 }
+*/
