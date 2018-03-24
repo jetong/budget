@@ -38,11 +38,13 @@ body {
   width: 60%;
   height: 22em;
   min-width: 18em;
+  border: #A239CA solid 1px;
 }
 
 #key-wrapper {
   width:40%;
   min-width: 5em;
+  border: #A239CA solid 1px;
 }
 
 h1 {
