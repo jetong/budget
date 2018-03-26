@@ -6,3 +6,7 @@ Wrap canvas with a div.  Adjust the div's width/height, and have the canvas resi
 Resizing canvas directly clears the canvas and resets the context.
 
 Use min-width to maintain page layout when browser window is collapsed to small view.
+
+Object.keys(sessionStorage) and Object.values(sessionStorage) are arrays for accessing stored
+keys and values, but they are indexed based on alphabetical order of the keys.
+One issue was trying to align these arrays with the array of input expenses submitted by the user.
