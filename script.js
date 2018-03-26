@@ -1,7 +1,55 @@
 var canvas;
 var context;
-var sum = 0;
+var totalExpense = 0;
 var colors = [];
+var expenses = [];
+
+
+function update() {
+  // Initialize map for expense categories
+  var prevExpenses = {};
+  var inputElements = document.getElementsByClassName("expenses");
+  var keys = [];
+  for(var i = 0; i < inputElements.length; i++) {
+    keys[i] = inputElements[i].id;
+    // If the current key/value is undefined, define the key with value 0
+    if(!prevExpenses[keys[i]]) {
+      prevExpenses[keys[i]] = 0;
+    }
+  }
+
+  // Get previous key/values from sessionStorage and store into map
+  // Note: Doesn't execute on first run as there are no stored key/values initially and the length is 0.
+  for(var i = 0; i < Object.keys(sessionStorage).length; i++) {
+    var key = Object.keys(sessionStorage)[i];
+    var value = sessionStorage.getItem(key);
+    prevExpenses[key] = parseInt(value);
+  }
+
+  // Get current values submitted by user and accumulate into prevExpenses map
+  for(var i = 0; i < inputElements.length; i++) {
+    if(inputElements[i].value) {
+      prevExpenses[inputElements[i].id] += parseInt(inputElements[i].value);
+    } else { // In case field input is empty/undefined
+      prevExpenses[inputElements[i].id] += 0;
+    }
+  }
+
+  // Set storage to the latest cumulative total
+  for(var key in prevExpenses) {
+    sessionStorage.setItem(key, parseInt(prevExpenses[key]));
+  }
+}
+
+function clearForm() {
+  sessionStorage.clear();
+  var exp = document.getElementsByClassName("expenses");
+  for(var i = 0; i < exp.length; i++) {
+console.log(exp[i].value);
+    exp[i].value = "";
+  }
+  context.clearRect(0, 0, canvas.width, canvas.height);
+}
 
 function init() {
   // Get canvas graphics context
@@ -36,20 +84,18 @@ function PieChart() {
 }
 
 function drawPieChart(x, y, radius) {
-  // Reset sum for each button click
-  sum = 0;
+  // Reset totalExpense after each button click
+  totalExpense = 0;
  
   // Place cached values into array and calculate sum
   var values = [];
   for(var i = 0; i < sessionStorage.length; i++) {
     var key = sessionStorage.key(i);
-    if(key != "income") {
-      var value = sessionStorage[key];
-      // Push value into array
-      values.push(value);
-      // Compute sum of all values
-      sum += parseInt(value);
-    }
+    var value = sessionStorage[key];
+    // Push value into array
+    values.push(value);
+    // Compute total_expense
+    totalExpense += parseInt(value);
   }
 
   // Starting and ending angles of each pie section
@@ -63,18 +109,21 @@ function drawPieChart(x, y, radius) {
 
     context.fillStyle = colors[i];
 
-    ratio = values[i]/sum;
+    ratio = values[i]/totalExpense;
     endingAngle = startingAngle + Math.PI*2*ratio;
 
     context.arc(x, y, radius, startingAngle, endingAngle);
     context.lineTo(x, y);
-
+    draw();
     startingAngle = endingAngle;
 
+  }
+}
+
+function draw() {
     context.fill();
     context.stroke();
     context.closePath();
-  }
 }
 
 function createKey() {
@@ -93,7 +142,7 @@ function createKey() {
 
     colorBox.style.width = "20px";
     colorBox.style.height = "20px";
-    colorBox.style.background = "blue";
+    colorBox.style.background = colors[i];
     colorBox.style.display = "inline-block";
     colorBox.style.border = "red";
     label.innerHTML = "housing";
