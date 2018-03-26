@@ -106,7 +106,12 @@ input:invalid {
   background-color: pink;
 }
 
-#submit {
+#btn-submit {
+  margin-top: .25em;
+  height: 2em;
+}
+
+#btn-clearForm {
   margin-top: .25em;
   height: 2em;
 }
