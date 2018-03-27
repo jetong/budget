@@ -4,7 +4,6 @@ var totalExpense = 0;
 var colors = [];
 var expenses = [];
 
-
 function update() {
   // Initialize map for expense categories
   var prevExpenses = {};
@@ -30,6 +29,7 @@ function update() {
   for(var i = 0; i < inputElements.length; i++) {
     if(inputElements[i].value) {
       prevExpenses[inputElements[i].id] += parseInt(inputElements[i].value);
+      expenses[i] = prevExpenses[inputElements[i].id];
     } else { // In case field input is empty/undefined
       prevExpenses[inputElements[i].id] += 0;
     }
@@ -45,7 +45,6 @@ function clearForm() {
   sessionStorage.clear();
   var exp = document.getElementsByClassName("expenses");
   for(var i = 0; i < exp.length; i++) {
-console.log(exp[i].value);
     exp[i].value = "";
   }
   context.clearRect(0, 0, canvas.width, canvas.height);
@@ -79,7 +78,7 @@ function resizeCanvas() {
 }
 
 function PieChart() {
-  drawPieChart(canvas.width/2, canvas.height/2, canvas.width/3);
+  drawPieChart(canvas.width/2, canvas.height/2, canvas.width*.4);
   createKey();
 }
 
@@ -135,20 +134,30 @@ function createKey() {
   }
 
   // Append new key items
-  for(var i = 0; i < 6; i++) {
-    var item = document.createElement("p");
+  var inputElements = document.getElementsByClassName("expenses");
+  for(var i = 0; i < inputElements.length; i++) {
+    var item = document.createElement("div");
     var label = document.createElement("label");
     var colorBox = document.createElement("div");
 
+    // style colorBox
     colorBox.style.width = "20px";
     colorBox.style.height = "20px";
     colorBox.style.background = colors[i];
+    colorBox.style.border = "solid thin #000000";
     colorBox.style.display = "inline-block";
-    colorBox.style.border = "red";
-    label.innerHTML = "housing";
-    label.style.border = "green";
-    item.style.border = "black";
+    colorBox.style.margin = "5px";
+    colorBox.style.float = "left";
+    // Style label next to colorBox
+    label.innerHTML = inputElements[i].id;
+    label.style.textAlign = "left";
+    label.style.width = "auto";
+    label.style.margin = "7px";
+    // Style item container for colorBox and label
+    item.style.width = "auto";
+    item.style.textAlign = "left";
 
+    // Attach items to DOM
     item.appendChild(colorBox);
     item.appendChild(label);
     keyDiv.appendChild(item);
