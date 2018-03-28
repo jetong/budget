@@ -27,19 +27,23 @@ function main() {
   processForm();
   // Render visual data
   draw();
+  // Display balance
+  displayBalance();
 }
 
 
 // Execute on 'start over' button click
 function startOver() {
-  // Clear cache
+  // Clear session stored values 
   sessionStorage.clear();
+  expenses = [];
 
-  // Clear form 
-  var exp = document.getElementsByClassName("expenses");
-  for(var i = 0; i < exp.length; i++) {
-    exp[i].value = "";
+  // Clear input fields 
+  var fields = document.getElementsByTagName("input");
+  for(var i = 0; i < fields.length; i++) {
+    fields[i].value = "";
   }
+  document.getElementById("balance").style.background = "";
 
   // Clear canvas
   context.clearRect(0, 0, canvas.width, canvas.height);
@@ -169,6 +173,24 @@ function drawKey() {
     item.appendChild(colorBox);
     item.appendChild(label);
     keyDiv.appendChild(item);
+  }
+}
+
+
+function displayBalance() {
+  var income = document.getElementById("income").value || 0;
+
+  var totalExpenses = 0;
+  for(var i = 0; i < expenses.length; i++) {
+    totalExpenses += expenses[i];
+  }
+
+  var balance = income - totalExpenses;
+  document.getElementById("balance").value = balance; 
+  if(balance < 0) {
+    document.getElementById("balance").style.background = "#ffdddd";
+  } else {
+    document.getElementById("balance").style.background = "#ddffdd";
   }
 }
 
