@@ -40,15 +40,14 @@
             <label for="savings">Savings</label>
             <input type="number" class="expenses" id="savings" placeholder=0>
           </fieldset> 
-          <button type="button" id="btn-submit" onclick="update()">Submit Expenses</button>
-          <button type="button" id="btn-clearForm" onclick="clearForm()">Start Over</button>
+          <button type="button" id="btn-submit" onclick="main()">Submit Expenses</button>
+          <button type="button" id="btn-start-over" onclick="startOver()">Start Over</button>
         <form>
       </main>
     </div> <!-- left div -->
 
     <div id="right">
       <h2>Pie Chart</h2>
-      <button type="button" id="graph" onclick="PieChart()">Render/Update</button>
       <div id="right-row">
         <div id="canvas-wrapper">
           <canvas id="canvas"></canvas>
