@@ -5,56 +5,6 @@ body {
   color: #A239CA;
 }
 
-#row {
-  display:flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  padding: 1em 0 1em 0;
-}
-
-#left {
-  padding: .5em 0 .5em 0;
-  width: 40%;
-  min-width: 24em;
-  text-align: center;
-  border-right: 1px solid #A239CA;
-}
-
-#right {
-  padding: .5em 0 .5em 0;
-  width: 60%;
-  text-align: center;
-}
-
-#right-row {
-  display:flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  margin-right: 1em;
-}
-
-#canvas-wrapper {
-  width: 65%;
-  height: 24em;
-  min-width: 20em;
-  max-width: 27em;
-}
-
-#space {
-  width: 10%;
-  min-width: 0em;
-  max-width: 3em;
-}
-
-#key-wrapper {
-  width:25%;
-  min-width: 10em;
-  max-width: 12em;
-  padding-left: 0em;
-  margin-top: 2em;
-}
-
 h1 {
   padding-bottom: .25em;
   font-size: 2em;
@@ -78,6 +28,33 @@ h3 {
   width: 8em;
 }
 
+
+/* Structure the page as a row with left and right flexbox elements */
+#row {
+  display:flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  padding: 1em 0 1em 0;
+}
+
+#left {
+  padding: .5em 0 .5em 0;
+  width: 40%;
+  min-width: 24em;
+  text-align: center;
+  border-right: 1px solid #A239CA;
+}
+
+#right {
+  padding: .5em 0 0 0;
+  width: 60%;
+  max-width: 40em;
+  text-align: center;
+}
+
+
+/* Left flexbox (Form + buttons) */
 main {
   width: 22em;
   margin: auto;
@@ -86,7 +63,8 @@ main {
 fieldset {
   padding: 10px;
   border: 1px solid;
-  margin-bottom: 10px;
+  margin-top: 2em;
+  margin-bottom: 2em;
 }
 
 legend {
@@ -98,24 +76,20 @@ legend {
 }
 
 label {
-  display:inline-block;
+  display: inline-block;
   margin-bottom: 10px;
   margin-right: 1em;
-  color: #8540bf;
+  color: #A239CA;
   font-style: normal;
   text-align: right;
   width: 8em;
 }
 
 input {
-  float:right;
+  float: right;
   margin-right: 3em;
   width: 100px;
   text-align: right;
-}
-
-input:invalid {
-  background-color: pink;
 }
 
 #btn-submit {
@@ -126,4 +100,74 @@ input:invalid {
 #btn-start-over {
   margin-top: .25em;
   height: 2em;
+}
+
+
+/* Right flexbox (canvas-balance-wrapper + buffer space + key-wrapper) */
+#right-row {
+  display:flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  height: 26em;
+}
+
+#canvas-balance-wrapper {
+  width: 65%;
+  min-width: 20em;
+  max-width: 27em;
+}
+
+#canvas-wrapper {
+  height: 23em;
+}
+
+#buffer-space {
+  width: 10%;
+  min-width: 0em;
+  max-width: 3em;
+}
+
+#balance-panel {
+  display:flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  height: 2em;
+  border-top: solid thin #A239CA;
+  padding-top: .25em;
+}
+
+#left-panel {
+  width: 15%;
+}
+
+#right-panel {
+  width: 15%;
+}
+
+#mid-panel {
+  width: 70%;
+  text-align: center;
+}
+
+#balance-label {
+  font-weight: 100;
+  font-style: italic;
+  font-size: 20px;
+  width: 4em;
+}
+
+#balance {
+  margin-top: .2em;
+  margin-right: 1em;
+  height: 1.25em;
+  text-align: center;
+}
+
+#key-wrapper {
+  width:25%;
+  min-width: 10em;
+  max-width: 12em;
+  padding-left: 0em;
+  margin-top: 2em;
 }
