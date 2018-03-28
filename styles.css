@@ -123,12 +123,7 @@ input:invalid {
   height: 2em;
 }
 
-#btn-clearForm {
+#btn-start-over {
   margin-top: .25em;
-  height: 2em;
-}
-
-#graph {
-  margin-bottom: 1em;
   height: 2em;
 }
