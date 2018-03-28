@@ -1,17 +1,67 @@
 var canvas;
 var context;
-var totalExpense = 0;
 var colors = [];
 var expenses = [];
 
-function update() {
+
+// Execute on page load
+function init() {
+  // Get canvas graphics context
+  canvas = document.getElementById("canvas");
+  context = canvas.getContext("2d");
+
+  // Initialize rgb values for categories
+  randomizeColors();
+
+  // Register canvas dimensions onload
+  setCanvasDimensions();
+
+  // Add listener to adjust canvas to match window resize, and redraw the pie chart
+  window.addEventListener('resize', resizeCanvas, false);
+}
+
+
+// Execute on 'submit expenses' button click
+function main() {
+  // Process form and store values in cache
+  processForm();
+  // Render visual data
+  draw();
+}
+
+
+// Execute on 'start over' button click
+function startOver() {
+  // Clear cache
+  sessionStorage.clear();
+
+  // Clear form 
+  var exp = document.getElementsByClassName("expenses");
+  for(var i = 0; i < exp.length; i++) {
+    exp[i].value = "";
+  }
+
+  // Clear canvas
+  context.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Clear key
+  keyDiv = document.getElementById("key");
+  while (keyDiv.firstChild) {
+    keyDiv.removeChild(keyDiv.firstChild);
+  }
+
+  randomizeColors();
+}
+
+
+function processForm() {
   // Initialize map for expense categories
   var prevExpenses = {};
   var inputElements = document.getElementsByClassName("expenses");
   var keys = [];
   for(var i = 0; i < inputElements.length; i++) {
     keys[i] = inputElements[i].id;
-    // If the current key/value is undefined, define the key with value 0
+    // If current key is undefined, define it with value 0
     if(!prevExpenses[keys[i]]) {
       prevExpenses[keys[i]] = 0;
     }
@@ -41,91 +91,47 @@ function update() {
   }
 }
 
-function clearForm() {
-  sessionStorage.clear();
-  var exp = document.getElementsByClassName("expenses");
-  for(var i = 0; i < exp.length; i++) {
-    exp[i].value = "";
-  }
-  context.clearRect(0, 0, canvas.width, canvas.height);
-}
 
-function init() {
-  // Get canvas graphics context
-  canvas = document.getElementById("canvas");
-  context = canvas.getContext("2d");
-
-  // Initialize rgb values
-  var categories = document.getElementsByTagName("input").length - 1;
-  for(var i = 0; i < categories; i++) {
-    var red = Math.trunc(Math.random()*255);
-    var green = Math.trunc(Math.random()*255);
-    var blue = Math.trunc(Math.random()*255);
-    colors[i] = "rgb(" + red + "," + green + "," + blue + ")";
-  }
-
-  // Set listener to resize canvas to match window resize, and redraw the pieChart
-  window.addEventListener('resize', resizeCanvas, false);
-  // Register canvas dimensions onload
-  canvas.width = document.getElementById("canvas-wrapper").clientWidth;
-  canvas.height = document.getElementById("canvas-wrapper").clientHeight;
-}
-
-function resizeCanvas() {
-  canvas.width = document.getElementById("canvas-wrapper").clientWidth;
-  canvas.height = document.getElementById("canvas-wrapper").clientHeight;
-  PieChart();
-}
-
-function PieChart() {
+function draw() {
   drawPieChart(canvas.width/2, canvas.height/2, canvas.width*.4);
-  createKey();
+  drawKey();
 }
 
+
+// Draw pie chart one section (category) at a time
 function drawPieChart(x, y, radius) {
-  // Reset totalExpense after each button click
-  totalExpense = 0;
- 
-  // Place cached values into array and calculate sum
-  var values = [];
-  for(var i = 0; i < sessionStorage.length; i++) {
-    var key = sessionStorage.key(i);
-    var value = sessionStorage[key];
-    // Push value into array
-    values.push(value);
-    // Compute total_expense
-    totalExpense += parseInt(value);
+  // Current pie section's ratio to the entire pie
+  var ratio;
+
+  // Sum up expenses to calculate individual ratios
+  var totalExpenses = 0;
+  for(var i = 0; i < expenses.length; i++) {
+    totalExpenses += expenses[i];
   }
 
   // Starting and ending angles of each pie section
   var startingAngle = 0;
   var endingAngle = 0;
 
-  // Current pie section's ratio of the whole pie
-  var ratio;
-  for(var i = 0; i < values.length; i++) {
+  for(var i = 0; i < expenses.length; i++) {
     context.beginPath();
 
     context.fillStyle = colors[i];
 
-    ratio = values[i]/totalExpense;
+    ratio = expenses[i]/totalExpenses;
     endingAngle = startingAngle + Math.PI*2*ratio;
 
     context.arc(x, y, radius, startingAngle, endingAngle);
     context.lineTo(x, y);
-    draw();
-    startingAngle = endingAngle;
-
-  }
-}
-
-function draw() {
     context.fill();
     context.stroke();
     context.closePath();
+    startingAngle = endingAngle;
+  }
 }
 
-function createKey() {
+
+function drawKey() {
   keyDiv = document.getElementById("key");
 
   // Remove previous key items
@@ -148,11 +154,13 @@ function createKey() {
     colorBox.style.display = "inline-block";
     colorBox.style.margin = "5px";
     colorBox.style.float = "left";
+
     // Style label next to colorBox
     label.innerHTML = inputElements[i].id;
     label.style.textAlign = "left";
     label.style.width = "auto";
     label.style.margin = "7px";
+
     // Style item container for colorBox and label
     item.style.width = "auto";
     item.style.textAlign = "left";
@@ -164,3 +172,30 @@ function createKey() {
   }
 }
 
+
+// Helper functions
+
+// Fill colors[] with random colors for each expense category
+function randomizeColors() {
+  var categories = document.getElementsByClassName("expenses");
+  for(var i = 0; i < categories.length; i++) {
+    var red = Math.trunc(Math.random()*255);
+    var green = Math.trunc(Math.random()*255);
+    var blue = Math.trunc(Math.random()*255);
+    colors[i] = "rgb(" + red + "," + green + "," + blue + ")";
+  }
+}
+
+
+// Update canvas dimensions and redraw pie chart
+function resizeCanvas() {
+  setCanvasDimensions();
+  drawPieChart(canvas.width/2, canvas.height/2, canvas.width*.4);
+}
+
+
+// Match canvas dimensions to the resizing parent wrapper-div
+function setCanvasDimensions() {
+  canvas.width = document.getElementById("canvas-wrapper").clientWidth;
+  canvas.height = document.getElementById("canvas-wrapper").clientHeight;
+}
