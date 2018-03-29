@@ -14,10 +14,10 @@ function init() {
   randomizeColors();
 
   // Register canvas dimensions onload
-  setCanvasDimensions();
+  resizeCanvas();
 
   // Add listener to adjust canvas to match window resize, and redraw the pie chart
-  window.addEventListener('resize', resizeCanvas, false);
+  window.addEventListener('resize', refreshCanvas, false);
 }
 
 
@@ -135,6 +135,7 @@ function drawPieChart(x, y, radius) {
 }
 
 
+// Dynamically create key for pie chart
 function drawKey() {
   keyDiv = document.getElementById("key");
 
@@ -177,6 +178,7 @@ function drawKey() {
 }
 
 
+// Display balance for current session
 function displayBalance() {
   var income = document.getElementById("income").value || 0;
 
@@ -210,14 +212,14 @@ function randomizeColors() {
 
 
 // Update canvas dimensions and redraw pie chart
-function resizeCanvas() {
-  setCanvasDimensions();
+function refreshCanvas() {
+  resizeCanvas();
   drawPieChart(canvas.width/2, canvas.height/2, canvas.width*.4);
 }
 
 
 // Match canvas dimensions to the resizing parent wrapper-div
-function setCanvasDimensions() {
+function resizeCanvas() {
   canvas.width = document.getElementById("canvas-wrapper").clientWidth;
   canvas.height = document.getElementById("canvas-wrapper").clientHeight;
 }
