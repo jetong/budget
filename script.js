@@ -4,11 +4,14 @@ var colors = [];
 var expenses = [];
 
 
-// Execute on page load
+// Execute on page load/refresh
 function init() {
   // Get canvas graphics context
   canvas = document.getElementById("canvas");
   context = canvas.getContext("2d");
+
+  // Clear cache on page refresh
+  startOver()
 
   // Initialize rgb values for categories
   randomizeColors();
