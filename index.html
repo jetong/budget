@@ -9,8 +9,10 @@
 </head>
 
 <body onload="init()">
+  <!-- Split page into left and right side -->
   <div id="row">
 
+    <!-- Left side of page -->
     <div id="left">
       <header>
         <h1>Budget Tracker</h1>
@@ -40,15 +42,20 @@
             <label for="savings">Savings</label>
             <input type="number" class="expenses" id="savings" placeholder=0>
           </fieldset> 
+
           <button type="button" id="btn-submit" onclick="main()">Submit Expenses</button>
           <button type="button" id="btn-start-over" onclick="startOver()">Start Over</button>
         <form>
       </main>
-    </div> <!-- left div -->
+    </div>
 
+    <!-- Right side of page -->
     <div id="right">
       <h2>Pie Chart</h2>
+      <!-- Split right side into 3 flexboxes -->
       <div id="right-row">
+
+        <!-- Left flexbox -->
         <div id="canvas-balance-wrapper">
           <div id="canvas-wrapper">
             <canvas id="canvas"></canvas>
@@ -64,8 +71,12 @@
             </div>
           </div>
         </div>
+
+        <!-- Middle flexbox (empty space for flexing) -->
         <div id="buffer-space">
         </div>
+
+        <!-- Right flexbox -->
         <div id="key-wrapper">
           <h3>Key</h3>
           <div id="key">
@@ -73,8 +84,8 @@
         </div>
 
       </div>
-    </div> <!-- right div-->
+    </div> <!-- close right div-->
 
-  </div> <!-- row div -->
+  </div> <!-- close main page row div -->
 </body>
 </html>
