@@ -1,8 +1,8 @@
 body {
-  background-color: #b0b7c1;
+  background-color: #f5f3f1;
   font-family: "Century Gothic", Arial;
   padding: 1em 0 1em 0;
-  color: #A239CA;
+  color: #117465;
 }
 
 h1 {
@@ -23,7 +23,7 @@ h3 {
   font-weight: 100;
   font-style: italic;
   text-align: left;
-  border-bottom: solid thin #A239CA;
+  border-bottom: solid thin #117465;
   padding-bottom: 5px;
   width: 8em;
 }
@@ -36,14 +36,15 @@ h3 {
   flex-wrap: nowrap;
   justify-content: space-between;
   padding: 1em 0 1em 0;
+  border: 1px solid #117465;
 }
 
 #left {
   padding: .5em 0 .5em 0;
   width: 40%;
-  min-width: 24em;
+  min-width: 600px;
   text-align: center;
-  border-right: 1px solid #A239CA;
+  border-right: 1px solid #117465;
 }
 
 #right {
@@ -53,6 +54,21 @@ h3 {
   text-align: center;
 }
 
+/* --- MOBILE --- */
+@media only screen and (max-width: 600px) {
+#row {
+  flex-wrap: wrap;
+}
+
+#left {
+  width: 100%;
+}
+
+#right {
+	width: 100%;
+}
+
+}
 
 /* Left flexbox (Form + buttons) */
 main {
@@ -79,7 +95,6 @@ label {
   display: inline-block;
   margin-bottom: 10px;
   margin-right: 1em;
-  color: #A239CA;
   font-style: normal;
   text-align: right;
   width: 8em;
@@ -133,7 +148,7 @@ input {
   flex-wrap: nowrap;
   justify-content: space-between;
   height: 2em;
-  border-top: solid thin #A239CA;
+  border-top: solid thin #117465;
   padding-top: .25em;
 }
 
